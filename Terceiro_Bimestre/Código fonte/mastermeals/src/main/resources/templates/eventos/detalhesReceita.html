@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  lang="pt-br">
+
+<head>
+  <title>Detalhe da Receita</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+	<div class="Menu">
+		<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="/buscarReceita">
+					 	<img src="logo.png" width="160" height="60" style="margin-right: 20px; margin-left: 20px;" alt="">
+				  </a>
+			    </div>
+			    
+			    
+			    <ul class="nav navbar-nav">
+			      <li><a href="#">ENCONTRAR RECEITA</a></li>
+			      <li><a href="#">RECEITAS RAPIDAS</a></li>
+			      <li><a href="#">FILTRAR RECEITAS</a></li>
+			      <li><a href="#">RECEITA SURPRESA</a></li>
+			    </ul>
+			    
+			    
+			    <ul class="nav navbar-custom navbar-right">
+			      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Bem-vindo,
+				<b>[[${#request.userPrincipal.principal.fullName}]]</b></a></li>
+			      <li><a href="#" style="text-align:end"><span class="glyphicon glyphicon-log-in"></span>Sair</a></li>
+			    </ul>
+			    
+			      <ul class="nav navbar-custom navbar-right">
+			      <li><a href="#"><span class="	glyphicon glyphicon-question-sign"></span> Precisa de ajuda?</a></li>
+			    </ul>
+			  </div>
+			</nav>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="col-12 col-md-12 col-xl-12">
+		
+	        <div class="w-100 p-3" style="background-color: rgba(255,255,255,0.7); border-top-left-radius: 50px; border-top-right-radius: 50px;">
+	        
+		        <div class="container-fluid">
+		        
+		        	<div class="row">
+			        	<div class="col-4 col-md-4 col-xl-4" align="center">
+	        				<div class="d-flex justify-content-center">
+					      		<img  th:src="@{${receita.imagem}}" alt="logo" style="width:350px; height: 250px; border-radius:30%;padding-top:20px;">
+					      	</div>
+						</div>
+						
+					    <div class="col-4 col-md-4 col-xl-4">
+					    	<div class="d-flex justify-content-center" style= "padding-top:20px;">
+		        				<h1 class="bold" th:text="${receita.nome}"></h1>
+	       					</div>	
+	        				<div class="d-flex justify-content-center" style= "padding-top:20px;">
+		        				<p class="desc">Avaliacao: <span th:text="${receita.avaliacao}"></span></p>
+		        			</div>
+	        				<div class="d-flex justify-content-center">
+		        				<p class="desc">Tempo de Preparo: <span th:text="${receita.tempo_preparo}"></span></p>
+		        			</div>
+	        				<div class="d-flex justify-content-center">
+		        				<p class="desc">Rendimento: <span th:text="${receita.porcoes}"></span></p>
+		        			</div>
+					    </div>
+					    
+						<div class="col-4 col-md-4 col-xl-4" align="center">
+							<div class="d-flex justify-content-center" style= "padding-top:40px">
+					      			<button class = "pedir" type="button">PEDIR REFEICAO</button>
+						      			<p class="avalie">Avalie</p>
+					    	</div>
+						</div>
+					    
+		        	</div>
+		        	
+		        	<div class="row">
+			        	<div class='orangeLine'>
+	        			</div>
+		        	</div>
+		        	
+		        </div>
+	    	</div>
+	    		
+	    	
+	    	<div class="w-100 p-3" style="background-color: rgba(255,255,255,0.7); border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;">
+		    	<div class="container-fluid">
+		    	
+		    		<div class="row">
+		    			<div class="col-6 col-md-6 col-xl-6" align="center">
+							<div class="d-flex justify-content-center">
+					    		<h3 class="bold">INGREDIENTES</h3>
+					    		<br/>
+					    		<span th:text="${receita.ingredientes}"></span>
+					    	</div>
+						</div>
+						
+					    <div class="col-6 col-md-6 col-xl-6" align="center">
+					    	<div class="d-flex justify-content-center">
+					    		<h3 class="bold">MODO DE PREPARO</h3>
+					    		<br/>
+					    		<span th:text="${receita.modo_preparo}"></span>
+					    	</div>
+						</div>
+		    			
+		    		</div>
+		    	
+		    	</div>
+	    	</div>
+	    	
+	    	
+	    </div>
+	</div>
+	
+</body>
+
+<style>
+	html {
+	  height: 100%;
+	  width: 100%;
+	}
+	
+	body{
+	background-color:#FFB800;
+	display: table;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	}
+
+	.navbar {
+    background-color: #FFB800;
+    border-color:#FFB800;
+    }
+
+	.navbar-nav {
+    background-color: #FFB800;
+    }
+     
+     
+    ul.navbar-nav{
+       padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    }
+     
+    ul.navbar-nav li a{
+    margin-top: 20px;
+    margin-right: 40px;
+    width:100%;
+    border-radius:50px;
+    text-align: center;
+    font-weight:bold;
+    }
+    
+    .navbar-inverse .navbar-nav li a{
+    color: black;
+    }
+          
+    ul.navbar-custom li a{
+    margin-op: 20px;
+    margin-right: 20px;
+    width:125%;
+    color:black; 
+    }
+	
+	.pedir{
+	background-color:red;
+	padding: 5%;
+	width:70%;
+	border-radius:40px;
+	font-size: 30px;
+	font-weight:bold;
+	}
+	
+	.centered-element {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	}
+	
+	.orangeLine{
+	 height: 1px;
+  	 background: red;
+  	 margin:20px;
+	}
+	
+	h3.bold{
+		font-weight: bold;
+	}
+	
+	h1.bold{
+		font-weight:bold;
+	}
+	
+	p.desc{
+		font-weight:500;
+		font-size:20px;
+		color:red;
+	}
+	
+	p.avalie{
+		font-weight:450;
+		color: red;
+		font-size:30px;
+		text-align:center;	
+	}
+	
+    
+    
+     
+</style>
+</html>

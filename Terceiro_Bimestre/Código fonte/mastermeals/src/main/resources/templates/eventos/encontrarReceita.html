@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  lang="pt-br">
+<head>
+  <title>Lista de Receitas</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+	<div class="Menu">
+		<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="/">
+					 	<img src="logo.png" width="160" height="60" style="margin-right: 20px; margin-left: 20px;" alt="">
+				  </a>
+			    </div>
+			    
+			    
+			    <ul class="nav navbar-nav">
+			      <li><a href="#">RECEITAS RAPIDAS</a></li>
+			      <li><a href="#">FILTRAR RECEITAS</a></li>
+			      <li><a href="#">RECEITA SURPRESA</a></li>
+			    </ul>
+			    
+			    
+			    <ul class="nav navbar-custom navbar-right">
+			      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Bem-vindo,
+				<b>[[${#request.userPrincipal.principal.fullName}]]</b></a></li>
+			      <li><a href="#" style="text-align:end"><span class="glyphicon glyphicon-log-in"></span>  Sair</a></li>
+			    </ul>
+			    
+			      <ul class="nav navbar-custom navbar-right">
+			      <li><a href="#"><span class="	glyphicon glyphicon-question-sign"></span> Precisa de ajuda?</a></li>
+			    </ul>
+			  </div>
+			</nav>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="col-12 col-md-12 col-xl-12">
+	        <div class="w-100 p-3" style="background-color: rgba(255,255,255,0.7); border-top-left-radius: 50px; border-top-right-radius: 50px;">
+		       	<div class="container-fluid">
+		       		<div class = "row">
+		       			<form method="post">
+							<div class="col-md-2">
+							</div>		        	
+							<div class="col-md-8">
+								<div class="col text-center">
+									<div class="form-group">
+					                    <label for=idReceita class=form-label></label>
+					                    <input type="text" class="form-control" id="idReceita" placeholder="Insira o nome de uma receita" name="nome">
+					                    
+					                </div>
+					             </div>
+				             </div>
+				             <div class="col-md-2">
+				             	<div class="col text-center">
+				             		<button class="buscar-receita" type="submit">BUSCAR</button>
+				             	</div>
+				             </div>
+			             </form>
+	                </div>
+		        	<div class="row">
+			        	<div class='orangeLine'>
+	        			</div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col-md-2" align="center">
+			        	</div>	
+			        				
+			        	<div class="col-md-8" align="center">
+			        		<div class = "lista-receitas-selecionadas">
+			        			<ul class="receitas">
+									 <table>
+									 	<thead>
+									 		<tr>
+											    <th>Receita</th>
+											    <th>Tempo Aproximado</th>
+											    <th>Valor Estimado</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody>
+		
+											<tr th:each="receitas : ${receitas}">
+												<td><a th:href="@{/detalhesReceita/{nome}(nome = ${receitas.nome})}"><span th:text="${receitas.nome}"></span></a></td>
+												<td><span th:text="${receitas.tempo_preparo}"></span></td>
+												<td><span th:text="${receitas.valor}"> Reais</span></td>
+											</tr>
+										</tbody>
+									 </table>
+			        			</ul>	
+			        		</div>
+			        	</div>		
+			        	<div class="col-md-2" align="center">
+			        	</div>				
+		        	</div>
+		        </div>
+	    	</div>
+	    	<div class="w-100 p-3" style="background-color: rgba(255,255,255,0.7); border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;">
+		    	<div class="container-fluid">
+		    		<div class='invisible-line'>
+	        		</div>
+		    	</div>
+		    </div>
+	    	
+	    </div>
+	</div>
+	
+</body>
+
+<style>
+	html {
+	  height: 100%;
+	  width: 100%;
+	}
+	
+	body{
+	background-color:#FFB800;
+	display: table;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	}
+
+	.navbar {
+    background-color: #FFB800;
+    border-color:#FFB800;
+    }
+
+	.navbar-nav {
+    background-color: #FFB800;
+    }
+     
+     
+    ul.navbar-nav{
+   	padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    }
+     
+    ul.navbar-nav li a{
+    margin-top: 20px;
+    margin-right: 40px;
+	width:100%;
+	border-radius:50px;
+	text-align: center;
+	font-weight:bold;
+	}
+	
+	.navbar-inverse .navbar-nav li a{
+	color: black;
+	}
+	  	
+  	 ul.navbar-custom li a{
+    margin-op: 20px;
+    margin-right: 20px;
+    width:125%;
+	color:black; 
+	}
+	
+	.pedir{
+	background-color:red;
+	padding: 5%;
+	width:70%;
+	border-radius:40px;
+	font-size: 30px;
+	font-weight:bold;
+	}
+	
+	.buscar-receita{
+	background-color:red;
+	margin-top: 10px;
+	padding: 5%;
+	width:50%;
+	border-radius:10px;
+	font-size: 15px;
+	font-weight:bold;
+	}
+	
+	.centered-element {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	}
+	
+	.orangeLine{
+	 height: 1px;
+  	 background: red;
+  	 margin:20px;
+	}
+	
+	.invisible-line{
+	 height: 10px;
+  	 background: rgba(255,255,255,0);
+  	 margin:20px;
+	}
+	
+	.lista-receitas-selecionadas{
+  	 height: 800px;
+  	 line-height:3em;
+  	 overflow-y:scroll;
+  	 padding:5px;
+	}
+	
+	h3.bold{
+		font-weight: bold;
+	}
+	
+	h1.bold{
+		font-weight:bold;
+	}
+	
+	p.desc{
+		font-weight:500;
+		font-size:20px;
+		color:red;
+	}
+	
+	p.avalie{
+		font-weight:450;
+		color: red;
+		font-size:30px;
+		text-align:center;	
+	}
+	
+	::-webkit-scrollbar {
+  	width: 10px;
+	}
+	
+	/* Track */
+	::-webkit-scrollbar-track {
+	  background: #f1f1f1; 
+	}
+	 
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+	  background: #888; 
+	}
+	
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+	  background: #555; 
+	}
+  	
+  	table {
+	  font-family: arial, sans-serif;
+	  border-collapse: separate;
+	  border-spacing: 0 15px;
+	  width: 100%;
+	}
+	
+	td, th {
+	  border: 1px solid #EC5627;
+	  text-align: center;
+	  padding: 1%;
+	}
+	
+	
+	tr:nth-child(even) {
+	  background-color: #EC5627;
+	  margin-top:5%;
+	}
+		    
+     
+</style>
+</html>
